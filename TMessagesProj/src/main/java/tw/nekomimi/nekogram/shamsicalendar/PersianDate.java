@@ -70,6 +70,8 @@ public class PersianDate {
     this.changeTime();
   }
 
+  public static boolean displayPersianCalendarByLatin = NekoConfig.displayPersianCalendarByLatin.Bool();
+  
   /**
    * ---- Don not change---
    */
@@ -81,6 +83,8 @@ public class PersianDate {
       {0, 31, 62, 93, 124, 155, 186, 216, 246, 276, 306, 336, 366}};
   private final String[] dayNames = {"شنبه", "یک‌شنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنج‌شنبه",
       "جمعه"};
+  private final String[] latindayNames = {"Shanbeh", "YekShanbeh", "DoShanbeh", "SeShanbeh", "CheharShanbeh", "PanjShanbeh",
+      "Jomeh"};
   private final String[] monthNames = {"فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
       "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"};
   private final String[] monthNamesLatin = {"Farvardin", "Ordibehesht", "Khordad", "Tir", "Mordad", "Shahrivar",
@@ -197,7 +201,7 @@ public class PersianDate {
   }
 
   public String getPersianShortDate() {
-    if (NekoConfig.displayPersianCalendarByLatin) {
+    if (displayPersianCalendarByLatin) {
         return "" + formatToMilitary(this.getShYear()) + this.delimiter + formatToMilitary(getShMonth() + 1) + this.delimiter + formatToMilitary(this.getShDay());
     } else {
         return LanguageUtils.getPersianNumbers("" + formatToMilitary(this.getShYear()) + this.delimiter + formatToMilitary(this.getShMonth() + 1) + this.delimiter + formatToMilitary(this.getShDay()));
@@ -205,7 +209,7 @@ public class PersianDate {
   }
 
   public String getPersianNormalDate() {
-    if (NekoConfig.displayPersianCalendarByLatin) {
+    if (displayPersianCalendarByLatin) {
       return this.getShDay() + " " + this.monthNamesLatin() + " " + this.getShYear();
     } else {
       return LanguageUtils.getPersianNumbers(String.valueOf(this.getShDay())) + " " +  this.monthName() + " " + LanguageUtils.getPersianNumbers(String.valueOf(this.getShYear()));
@@ -214,7 +218,7 @@ public class PersianDate {
 
   //like 9 شهریور
   public String getPersianMonthDay() {
-    if (NekoConfig.displayPersianCalendarByLatin) {
+    if (displayPersianCalendarByLatin) {
       return this.getShDay() + " " + this.monthNamesLatin();
     } else {
       return LanguageUtils.getPersianNumbers(String.valueOf(this.getShDay())) + " " + this.monthName();
@@ -674,6 +678,10 @@ public class PersianDate {
    */
   public String dayName(PersianDate date) {
     return this.dayNames[this.dayOfWeek(date)];
+  }
+  
+  public String latindayName(PersianDate date) {
+    return this.latindayNames[this.dayOfWeek(date)];
   }
 
   /**
